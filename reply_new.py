@@ -1,11 +1,9 @@
-# /assistente_cpe/nova_cpe.py
-
 import requests
 import json
 
-# --- Constantes do Módulo ---
+
 FRESHDESK_DOMAIN = 'int6tech.freshdesk.com'
-# A API_KEY foi removida daqui!
+
 
 STATUSES_PERMITIDOS = [2, 3]
 TIPO_ESPERADO = "Suporte para novo fabricante/modelo de ONU/firmware"
@@ -46,8 +44,7 @@ Atenciosamente.</p>
 """
 
 
-# --- Função Principal ---
-# Adicionamos 'api_key' como um parâmetro obrigatório
+
 def executar_nova_instalacao(ticket_id: str, api_key: str):
     """
     Verifica um ticket no Freshdesk e, se for de homologação, envia uma resposta automática.
@@ -58,7 +55,7 @@ def executar_nova_instalacao(ticket_id: str, api_key: str):
         url_get_ticket = f"https://{FRESHDESK_DOMAIN}/api/v2/tickets/{ticket_id}"
         print(f"Buscando informações em: {url_get_ticket}")
 
-        # A 'api_key' agora vem do parâmetro da função
+
         response = requests.get(url_get_ticket, auth=(api_key, 'X'))
         response.raise_for_status()
 
@@ -75,7 +72,7 @@ def executar_nova_instalacao(ticket_id: str, api_key: str):
             headers = {'Content-Type': 'application/json'}
             payload = {'body': MENSAGEM_AUTOMATICA_HTML}
 
-            # Usando a 'api_key' do parâmetro aqui também
+           
             reply_response = requests.post(url_reply, auth=(api_key, 'X'), headers=headers, data=json.dumps(payload))
             reply_response.raise_for_status()
 
