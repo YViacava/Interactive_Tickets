@@ -72,7 +72,7 @@ def executar_nova_instalacao(ticket_id: str, api_key: str):
             headers = {'Content-Type': 'application/json'}
             payload = {'body': MENSAGEM_AUTOMATICA_HTML}
 
-           
+
             reply_response = requests.post(url_reply, auth=(api_key, 'X'), headers=headers, data=json.dumps(payload))
             reply_response.raise_for_status()
 
